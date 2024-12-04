@@ -14,7 +14,7 @@ const app = express();
 mongoose.connect(DB_ADDRESS);
 
 app.use(cors({
-  origin:  '*',
+  origin: 'https://mestoalice.nomorepartiesco.ru',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
