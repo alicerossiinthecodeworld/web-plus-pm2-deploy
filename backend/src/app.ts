@@ -14,9 +14,9 @@ const app = express();
 mongoose.connect(DB_ADDRESS);
 
 app.use(cors({
-  origin: 'https://mestoalice.nomorepartiesco.ru', // Или укажите '*' для разрешения всех доменов
+  origin: 'https://mestoalice.nomorepartiesco.ru',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Разрешаем передачу cookie
+  credentials: true,
 }));
 
 app.use(express.json());
