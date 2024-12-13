@@ -18,34 +18,21 @@ const app = express();
 // Подключение к MongoDB
 mongoose.connect(DB_ADDRESS);
 
-// Настройка CORS для всех маршрутов
-app.use(cors({
-  origin: 'https://mestoalice.nomorepartiesco.ru', // Укажите точный домен вашего фронтенда
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'], // Все поддерживаемые методы
-  allowedHeaders: ['Authorization', 'Content-Type'], // Заголовки, которые клиент может отправлять
-  credentials: true, // Разрешение для куки
-}));
-
-// Обработка preflight-запросов (OPTIONS)
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Origin', 'https://mestoalice.nomorepartiesco.ru');
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Authorization,Content-Type');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    return res.sendStatus(204); // Успешный ответ для preflight-запросов
-  }
-  next();
+app.enableCors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type, Authorization',
 });
 
-// Middleware для обработки JSON и form-data
+
+// Middleware для обработки тела запросов
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Middleware для работы с куки
 app.use(cookieParser());
 
-// Подключение маршрутов приложения
+// Подключение маршрутов
 app.use(routes);
 
 // Обработка ошибок celebrate
