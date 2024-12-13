@@ -30,7 +30,13 @@ app.use((req, res, next) => {
   next();
 });
 
-mongoose.connect(DB_ADDRESS);
+mongoose.connect('mongodb://localhost:27017/mestodb', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('MongoDB connection error:', err));
+
 app.use(auth);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
