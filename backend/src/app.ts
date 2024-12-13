@@ -7,6 +7,7 @@ import { errors } from 'celebrate';
 import errorHandler from './middlewares/error-handler';
 import { DB_ADDRESS } from './config';
 import routes from './routes';
+import auth from 'middlewares/auth';
 
 // Настройка переменных окружения
 require('dotenv').config();
@@ -32,11 +33,10 @@ app.use((req, res, next) => {
 
 // Подключение к MongoDB
 mongoose.connect(DB_ADDRESS);
-
+app.use(auth);
 // Middleware для обработки тела запросов
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 // Middleware для работы с куки
 app.use(cookieParser());
 
