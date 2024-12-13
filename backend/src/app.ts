@@ -14,12 +14,10 @@ const app = express();
 mongoose.connect(DB_ADDRESS);
 
 app.use(cors({
-  origin: 'https://mestoalice.nomorepartiesco.ru', // Укажите ваш фронтенд-домен
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  origin: '*',
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
 }));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
