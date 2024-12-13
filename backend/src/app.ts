@@ -14,16 +14,14 @@ const { PORT = 3000 } = process.env;
 
 // Создание приложения Express
 const app = express();
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 // Подключение к MongoDB
 mongoose.connect(DB_ADDRESS);
-
-app.enableCors({
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-  allowedHeaders: 'Content-Type, Authorization',
-});
-
 
 // Middleware для обработки тела запросов
 app.use(express.json());
