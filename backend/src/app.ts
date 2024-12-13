@@ -16,9 +16,10 @@ const { PORT = 3000 } = process.env;
 // Создание приложения Express
 const app = express();
 app.use(cors({
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: 'https://mestoalice.nomorepartiesco.ru', // Домен фронтенда
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'], // Разрешённые методы
+  allowedHeaders: ['Content-Type', 'Authorization'], // Разрешённые заголовки
+  credentials: true, // Разрешить отправку куки
 }));
 app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
