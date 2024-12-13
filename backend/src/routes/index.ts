@@ -17,8 +17,11 @@ router.get('/crash-test', () => {
   }, 0);
 });
 
-router.post('/signup', validateUserBody, createUser);
-router.post('/signin', validateAuthentication, login);
+const asyncHandler = (fn: Function) => (req: Request, res: Response, next: NextFunction) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
+
+router.post('/signup', validateUserBody, asyncHandler(createUser));
+router.post('/signin', validateAuthentication, asyncHandler(login));
 
 // все роуты, кроме /signin и /signup, защищены авторизацией;
 router.use(auth);
