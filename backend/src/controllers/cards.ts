@@ -21,6 +21,7 @@ const createCard = (req: Request, res: Response, next: NextFunction) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError(err.message));
       } else {
+        console.error(err);
         next(err);
       }
     });

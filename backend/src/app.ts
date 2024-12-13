@@ -9,11 +9,9 @@ import { DB_ADDRESS } from './config';
 import routes from './routes';
 import auth from 'middlewares/auth';
 
-// Настройка переменных окружения
 require('dotenv').config();
 const { PORT = 3000 } = process.env;
 
-// Создание приложения Express
 const app = express();
 app.use(cors({
   origin: 'https://mestoalice.nomorepartiesco.ru',
@@ -32,25 +30,18 @@ app.use((req, res, next) => {
   next();
 });
 
-// Подключение к MongoDB
 mongoose.connect(DB_ADDRESS);
 app.use(auth);
-// Middleware для обработки тела запросов
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// Middleware для работы с куки
 app.use(cookieParser());
 
-// Подключение маршрутов
 app.use(routes);
 
-// Обработка ошибок celebrate
 app.use(errors());
 
-// Общий обработчик ошибок
 app.use(errorHandler);
 
-// Запуск сервера
 app.listen(PORT, () => {
   console.log(`Сервер запущен на порту ${PORT}`);
 });
