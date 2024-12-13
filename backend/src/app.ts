@@ -13,12 +13,19 @@ const { PORT = 3000 } = process.env;
 const app = express();
 mongoose.connect(DB_ADDRESS);
 
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Authorization,Content-Type');
-  res.sendStatus(204);
-});
+app.use(cors({
+  origin: 'https://mestoalice.nomorepartiesco.ru',
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Authorization', 'Content-Type'],
+  credentials: true,
+}));
+
+app.options('*', cors({
+  origin: 'https://mestoalice.nomorepartiesco.ru',
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Authorization', 'Content-Type'],
+  credentials: true,
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
