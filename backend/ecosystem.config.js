@@ -13,16 +13,14 @@ module.exports = {
     watch: false
   }],
 
-  deploy : {
-    production : {
-      user : 'anproskuryakova',
-      host : '84.201.146.41',
-      ref  : 'origin/main',
-      repo : 'git@github.com:username/mesto.git',
-      path : '/var/www/mesto',
-      'pre-deploy-local': '',
-      'post-deploy' : 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': ''
-    }
-  }
+  production: {
+    user: process.env.DEPLOY_USER,
+    host: process.env.DEPLOY_HOST,
+    ref: 'origin/main',
+    repo: process.env.REPO_URL,
+    path: '/var/www/mesto',
+    'pre-deploy-local': '',
+    'post-deploy': 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
+    'pre-setup': '',
+  },
 };
