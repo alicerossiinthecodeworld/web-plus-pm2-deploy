@@ -22,19 +22,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Origin', [
-      'https://mestoalice.nomorepartiesco.ru',
-      'https://5.35.107.90',
-    ]);
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Authorization,Content-Type');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    return res.sendStatus(204);
-  }
-  next();
-});
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
