@@ -12,4 +12,4 @@
 - **Frontend**: [http://84.201.146.41/](https://mestoalice.nomorepartiesco.ru/)  
 - **Backend API**: [http://84.201.146.41/api/]( https://api.mestoalice.nomorepartiesco.ru/
 )  
-- **Публичный IP-адрес сервера**: `84.201.146.41`
+- **Публичный IP-адрес сервера**: `5.35.107.90`

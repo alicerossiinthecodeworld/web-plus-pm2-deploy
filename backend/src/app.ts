@@ -14,14 +14,20 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 app.use(cors({
-  origin: 'https://mestoalice.nomorepartiesco.ru',
+  origin: [
+    'https://mestoalice.nomorepartiesco.ru',
+    'https://5.35.107.90',
+  ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
 app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Origin', 'https://mestoalice.nomorepartiesco.ru');
+    res.header('Access-Control-Allow-Origin', [
+      'https://mestoalice.nomorepartiesco.ru',
+      'https://5.35.107.90',
+    ]);
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Authorization,Content-Type');
     res.header('Access-Control-Allow-Credentials', 'true');
